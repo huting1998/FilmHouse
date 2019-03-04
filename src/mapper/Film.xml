@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="mapper.FilmMapper">
+	<select id="getAll" resultType="Film">
+	select * from film
+	</select>
+	<select id="getMovie" resultType="Film">
+	select * from film where type=0
+	</select>
+	<select id="getTV" resultType="Film">
+	select * from film where type=1
+	</select>
+	
+		<select id="getComic" resultType="Film">
+	select * from film where style=2
+	</select>
+	
+	<select id="getVip" resultType="Film" >
+	select * from film where likely=0
+	</select>
+	
+		<select id="getMovieById" resultType="Film" >
+	select * from film where id=#{id}
+	</select>
+	
+	<select id="searchFilm" resultType="Film">
+	select * from film where   name like "%" #{_parameter}"%"
+	</select>
+
+<select id="getFilmByID" resultType="Film">
+ select * from film where id=#{id}
+</select>	
+
+<update id="updateFilm" parameterType="Film">
+update film set name=#{name},time=#{time},intro=#{intro},type=#{type} where id=#{id}
+</update>
+
+<delete id="deleteFilm" >
+delete from film where id=#{id}
+</delete>
+<insert id="addFilm" parameterType="Film" useGeneratedKeys="true" keyProperty="id">
+insert into film (id,name,time,intro,type,pic) value(null,#{name},#{time},#{intro},#{type},#{pic})
+</insert>
+	</mapper>
